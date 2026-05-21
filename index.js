@@ -15,6 +15,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 app.set("view engine", "ejs");
@@ -42,33 +45,30 @@ app.get("/", (req, res) => {
 });
 
 app.post("/contact", async (req, res) => {
-  const { name, email } = req.body;
+  console.log(req.body);
+  return res.redirect("/#contact");
+  /* const { name, email } = req.body;
 
   try {
+    console.log("Before sendMail");
+
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-
       subject: "New Website Contact Form",
-
-      text: `
-New visitor submission
-
-Name: ${name}
-Email: ${email}
-      `,
+      text: `Name: ${name}\nEmail: ${email}`,
     });
 
-    req.flash("success", "Message sent successfully!");
+    console.log("Email sent");
 
-    res.redirect("/#contact");
+    req.flash("success", "Message sent successfully!");
+    return res.redirect("/#contact");
   } catch (error) {
-    console.error(error);
+    console.error("EMAIL ERROR:", error);
 
     req.flash("error", "Failed to send message.");
-
-    res.redirect("/#contact");
-  }
+    return res.redirect("/#contact");
+  } */
 });
 
 const server = app.listen(port, () => {
