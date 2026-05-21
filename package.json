@@ -15,8 +15,10 @@
     "ejs": "^5.0.2",
     "express": "^5.2.1",
     "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.19.0",
     "express-validator": "^7.3.2",
-    "http-status-codes": "^2.3.0"
+    "http-status-codes": "^2.3.0",
+    "nodemailer": "^8.0.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
