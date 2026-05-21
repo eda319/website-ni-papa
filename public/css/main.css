@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    /* prevents navbar overlap when scrolling */
+}
+
+/* ================= NAVBAR ================= */
+
+.brand-container {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.brand {
+    font-family: 'Nabla', serif;
+    font-size: 2.5rem;
+    color: goldenrod;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav>a {
+    font-family: 'Orbitron', serif;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.nav>a:hover {
+    color: goldenrod;
+}
+
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    min-height: 100vh;
+    /* each section takes full screen */
+    padding: 80px 40px;
+    /* spacing inside */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* optional alternating background for clarity */
+section:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+section:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* section titles */
+section h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #333;
+        flex-direction: column;
+        padding: 15px;
+        border-radius: 8px;
+        gap: 15px;
+    }
+
+    .nav.active {
+        display: flex;
+    }
+}
