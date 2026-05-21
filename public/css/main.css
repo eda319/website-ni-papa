@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Orbitron', sans-serif;
 }
 
 html {
@@ -36,7 +36,6 @@ html {
 }
 
 .nav>a {
-    font-family: 'Orbitron', serif;
     color: white;
     text-decoration: none;
     font-size: 1.2rem;
@@ -163,4 +162,14 @@ button:hover {
     padding: 12px;
     border-radius: 6px;
     margin-bottom: 15px;
+}
+
+/* footer */
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
 }
