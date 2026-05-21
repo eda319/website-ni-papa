@@ -46,8 +46,8 @@ app.get("/", (req, res) => {
 
 app.post("/contact", async (req, res) => {
   console.log(req.body);
-  return res.redirect("/#contact");
-  /* const { name, email } = req.body;
+
+  const { name, email } = req.body;
 
   try {
     console.log("Before sendMail");
@@ -68,7 +68,7 @@ app.post("/contact", async (req, res) => {
 
     req.flash("error", "Failed to send message.");
     return res.redirect("/#contact");
-  } */
+  }
 });
 
 const server = app.listen(port, () => {
