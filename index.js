@@ -47,7 +47,7 @@ app.get("/", (req, res) => {
 app.post("/contact", async (req, res) => {
   console.log(req.body);
 
-  const { name, email } = req.body;
+  const { name, email, message } = req.body;
 
   try {
     console.log("Before sendMail");
@@ -56,7 +56,7 @@ app.post("/contact", async (req, res) => {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: "New Website Contact Form",
-      text: `Name: ${name}\nEmail: ${email}`,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
 
     console.log("Email sent");
