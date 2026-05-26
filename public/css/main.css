@@ -574,6 +574,10 @@ section h1 {
 
 /* ================= CONTACT CARDS ================= */
 
+#contact {
+    padding-bottom: 120px;
+}
+
 .contact-methods {
     display: flex;
     justify-content: center;
