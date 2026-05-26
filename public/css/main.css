@@ -283,45 +283,138 @@ section h1 {
     font-size: 0.95rem;
 }
 
-/* ================= PROJECTS CAROUSEL ================= */
+/* ================= PROJECTS ================= */
 
 .projects-container {
-    width: min(900px, 100%);
+    width: min(1400px, 100%);
     text-align: center;
 }
 
 .section-title {
     width: 100%;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
-.project {
+/* ================= PROJECT GROUP ================= */
+
+.project-group {
     width: 100%;
+    margin-bottom: 90px;
+}
+
+.group-header {
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 0 5%;
+}
+
+.group-header h2 {
+    font-size: 2rem;
+    color: #222;
+}
+
+/* ================= HORIZONTAL SCROLL SLIDER ================= */
+
+.project-slider {
+    width: 100%;
+    display: flex;
+    gap: 28px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    padding: 20px 12%;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+/* scrollbar */
+.project-slider::-webkit-scrollbar {
+    height: 10px;
+}
+
+.project-slider::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 999px;
+}
+
+.project-slider::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 999px;
+}
+
+.project-slider::-webkit-scrollbar-thumb:hover {
+    background: goldenrod;
+}
+
+/* ================= PROJECT CARD ================= */
+
+.project-card {
+    flex: 0 0 76%;
+    scroll-snap-align: center;
+
+    min-height: 760px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* CRITICAL FIX */
-    margin-bottom: 60px;
+
+    background: #fff;
+    border-radius: 22px;
+    padding: 35px 30px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
+/* consistent title height */
 .project-title {
-    font-size: 1.8rem;
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    font-size: 2rem;
+
     margin-bottom: 10px;
 }
 
+/* consistent meta height */
 .project-meta {
-    font-size: 0.9rem;
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 0.95rem;
     color: #777;
-    margin-bottom: 10px;
-    line-height: 1.5;
+
+    margin-bottom: 12px;
 }
 
+/* consistent description height */
 .project-description {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+    min-height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
     max-width: 700px;
+    line-height: 1.7;
+    color: #555;
+
+    margin-bottom: 25px;
 }
 
 /* ================= CAROUSEL ================= */
@@ -330,16 +423,15 @@ section h1 {
     position: relative;
 
     width: 100%;
-    max-width: 700px;
-    /* SAME FOR ALL */
-    height: 400px;
+    max-width: 850px;
+    height: 450px;
 
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 18px;
+
     background: #000;
 
-    margin: 0 auto;
-    /* FIX ALIGNMENT */
+    margin-top: auto;
 }
 
 .carousel-track {
@@ -356,7 +448,7 @@ section h1 {
     height: 100%;
 
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.35s ease;
 }
 
 .slide.active {
@@ -369,58 +461,23 @@ section h1 {
     object-fit: cover;
 }
 
-.caption {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-/* buttons */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-
-    border: none;
-    font-size: 2rem;
-    padding: 10px;
-
-    cursor: pointer;
-    z-index: 10;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
-
-/* ================= BUTTONS ================= */
+/* ================= CAROUSEL BUTTONS ================= */
 
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 
+    width: 50px;
+    height: 50px;
+
+    border: none;
+    border-radius: 50%;
+
     background: rgba(0, 0, 0, 0.5);
     color: white;
 
-    border: none;
     font-size: 2rem;
-    padding: 10px;
-
     cursor: pointer;
     z-index: 10;
 
@@ -431,12 +488,42 @@ section h1 {
     background: rgba(0, 0, 0, 0.8);
 }
 
-.prev {
-    left: 10px;
+.carousel-btn.prev {
+    left: 15px;
 }
 
-.next {
-    right: 10px;
+.carousel-btn.next {
+    right: 15px;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    .project-slider {
+        padding: 15px 8%;
+        gap: 18px;
+    }
+
+    .project-card {
+        flex: 0 0 88%;
+        min-height: auto;
+        padding: 25px 20px;
+    }
+
+    .project-title {
+        min-height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .project-meta,
+    .project-description {
+        min-height: auto;
+    }
+
+    .carousel {
+        height: 260px;
+    }
 }
 
 /* ================= CONTACT CARDS ================= */

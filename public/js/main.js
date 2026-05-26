@@ -43,3 +43,27 @@ function moveSlide(button, direction) {
 
   slides[nextIndex].classList.add("active");
 }
+
+function moveProject(button, direction) {
+  const slider = button.closest(".project-slider");
+
+  const projects = slider.querySelectorAll(".project-card");
+
+  let currentIndex = Array.from(projects).findIndex((project) =>
+    project.classList.contains("active"),
+  );
+
+  projects[currentIndex].classList.remove("active");
+
+  currentIndex += direction;
+
+  if (currentIndex >= projects.length) {
+    currentIndex = 0;
+  }
+
+  if (currentIndex < 0) {
+    currentIndex = projects.length - 1;
+  }
+
+  projects[currentIndex].classList.add("active");
+}
