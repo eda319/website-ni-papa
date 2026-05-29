@@ -1,0 +1,50 @@
+{
+    "current": {
+        "electrical-panel-upgrade": {
+            "title": "Electrical Panel Upgrade",
+            "location": "Caloocan City, Philippines",
+            "client": "Juan A. Dela Cruz",
+            "description": "Panel upgrade and preventive maintenance project",
+            "captions": {
+                "1.webp": "Old panel before upgrade",
+                "2.webp": "Wiring inspection process",
+                "3.webp": "Final installed breaker system"
+            }
+        },
+        "led-lighting-installation": {
+            "title": "LED Lighting Installation",
+            "location": "Manila, Philippines",
+            "client": "Small Business Owner",
+            "description": "Energy-efficient LED lighting installation project",
+            "captions": {
+                "1.webp": "Before installation",
+                "2.webp": "LED layout setup",
+                "3.webp": "Final installed breaker system"
+            }
+        }
+    },
+    "past": {
+        "small-business-rewiring": {
+            "title": "Small Business Rewiring",
+            "location": "Quezon City, Philippines",
+            "client": "Juan A. Dela Cruz",
+            "description": "Commercial rewiring and repair work",
+            "captions": {
+                "1.webp": "Old wiring system",
+                "2.webp": "New wiring installation",
+                "3.webp": "Final installed breaker system"
+            }
+        },
+        "big-business-rewiring": {
+            "title": "Big Business Rewiring",
+            "location": "Quezon City, Philippines",
+            "client": "Juan A. Dela Cruz",
+            "description": "Commercial rewiring and repair work",
+            "captions": {
+                "1.webp": "Old wiring system",
+                "2.webp": "New wiring installation",
+                "3.webp": "Final installed breaker system"
+            }
+        }
+    }
+}

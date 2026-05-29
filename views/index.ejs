@@ -137,24 +137,30 @@
   <div class="section-container projects-container">
     <h1 class="section-title">Projects</h1>
 
+    <!-- CURRENT PROJECTS -->
+
     <div class="project-group">
       <div class="group-header">
         <h2>Current Projects</h2>
       </div>
 
       <div class="project-slider">
+        <% categories.current.forEach(project=>{ %>
+
         <div class="project-card">
-          <h2 class="project-title">Residential Wiring Upgrade</h2>
+          <h2 class="project-title"><%= project.name %></h2>
 
           <p class="project-meta">
-            📍 Quezon City, Philippines <br />
-            👤 Client: Private Homeowner
+            <% if (project.location) { %> 📍 <%= project.location %><br />
+            <% } %>
+
+            <% if (project.client) { %>
+            👤 Client:
+            <%= project.client %>
+            <% } %>
           </p>
 
-          <p class="project-description">
-            Full electrical rewiring and breaker panel upgrade to improve safety
-            and reliability.
-          </p>
+          <p class="project-description"><%= project.description || "" %></p>
 
           <div class="carousel" data-carousel>
             <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
@@ -162,17 +168,31 @@
             </button>
 
             <div class="carousel-track">
-              <div class="slide active">
-                <img src="/images/projects/project1/1.webp" />
+              <% project.images.forEach( (img,index)=>{ %>
+
+              <div class="slide <%= index===0 ? 'active' : '' %>">
+                <img src="<%= img.src %>" alt="<%= img.caption %>" />
+
+                <%
+
+if(img.caption){
+
+%>
+
+                <p class="image-caption"><%= img.caption %></p>
+
+                <%
+
+}
+
+%>
               </div>
 
-              <div class="slide">
-                <img src="/images/projects/project1/2.webp" />
-              </div>
+              <%
 
-              <div class="slide">
-                <img src="/images/projects/project1/3.webp" />
-              </div>
+});
+
+%>
             </div>
 
             <button class="carousel-btn next" onclick="moveSlide(this, 1)">
@@ -181,40 +201,15 @@
           </div>
         </div>
 
-        <div class="project-card">
-          <h2 class="project-title">LED Lighting Installation</h2>
+        <%
 
-          <p class="project-meta">
-            📍 Manila, Philippines <br />
-            👤 Client: Small Business Owner
-          </p>
+});
 
-          <p class="project-description">
-            Energy-efficient LED lighting installation project.
-          </p>
-
-          <div class="carousel" data-carousel>
-            <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
-              <span class="arrow left"></span>
-            </button>
-
-            <div class="carousel-track">
-              <div class="slide active">
-                <img src="/images/projects/project1/1.webp" />
-              </div>
-
-              <div class="slide">
-                <img src="/images/projects/project1/2.webp" />
-              </div>
-            </div>
-
-            <button class="carousel-btn next" onclick="moveSlide(this, 1)">
-              <span class="arrow right"></span>
-            </button>
-          </div>
-        </div>
+%>
       </div>
     </div>
+
+    <!-- PAST PROJECTS -->
 
     <div class="project-group">
       <div class="group-header">
@@ -222,104 +217,22 @@
       </div>
 
       <div class="project-slider">
-        <div class="project-card">
-          <h2 class="project-title">Electrical Panel Upgrade</h2>
-
-          <p class="project-meta">📍 Caloocan City, Philippines</p>
-
-          <p class="project-description">
-            Panel upgrade and preventive maintenance project.
-          </p>
-
-          <div class="carousel" data-carousel>
-            <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
-              <span class="arrow left"></span>
-            </button>
-
-            <div class="carousel-track">
-              <div class="slide active">
-                <img src="/images/projects/project1/1.webp" />
-              </div>
-
-              <div class="slide">
-                <img src="/images/projects/project1/2.webp" />
-              </div>
-            </div>
-
-            <button class="carousel-btn next" onclick="moveSlide(this, 1)">
-              <span class="arrow right"></span>
-            </button>
-          </div>
-        </div>
-
-                <div class="project-card">
-          <h2 class="project-title">Electrical Panel Upgrade</h2>
-
-          <p class="project-meta">📍 Caloocan City, Philippines</p>
-
-          <p class="project-description">
-            Panel upgrade and preventive maintenance project.
-          </p>
-
-          <div class="carousel" data-carousel>
-            <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
-              <span class="arrow left"></span>
-            </button>
-
-            <div class="carousel-track">
-              <div class="slide active">
-                <img src="/images/projects/project1/1.webp" />
-              </div>
-
-              <div class="slide">
-                <img src="/images/projects/project1/2.webp" />
-              </div>
-            </div>
-
-            <button class="carousel-btn next" onclick="moveSlide(this, 1)">
-              <span class="arrow right"></span>
-            </button>
-          </div>
-        </div>
-
-                <div class="project-card">
-          <h2 class="project-title">Electrical Panel Upgrade</h2>
-
-          <p class="project-meta">📍 Caloocan City, Philippines</p>
-
-          <p class="project-description">
-            Panel upgrade and preventive maintenance project.
-          </p>
-
-          <div class="carousel" data-carousel>
-            <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
-              <span class="arrow left"></span>
-            </button>
-
-            <div class="carousel-track">
-              <div class="slide active">
-                <img src="/images/projects/project1/1.webp" />
-              </div>
-
-              <div class="slide">
-                <img src="/images/projects/project1/2.webp" />
-              </div>
-            </div>
-
-            <button class="carousel-btn next" onclick="moveSlide(this, 1)">
-              <span class="arrow right"></span>
-            </button>
-          </div>
-        </div>
+        <% categories.past.forEach(project=>{ %>
 
         <div class="project-card">
-          <h2 class="project-title">Small Business Rewiring</h2>
+          <h2 class="project-title"><%= project.name %></h2>
 
-          <p class="project-meta">📍 Quezon City, Philippines</p>
+          <p class="project-meta">
+            <% if (project.location) { %> 📍 <%= project.location %><br />
+            <% } %>
 
-          <p class="project-description">
-            Commercial rewiring and repair work.
+            <% if (project.client) { %>
+            👤 Client:
+            <%= project.client %>
+            <% } %>
           </p>
+
+          <p class="project-description"><%= project.description || "" %></p>
 
           <div class="carousel" data-carousel>
             <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
@@ -327,13 +240,31 @@
             </button>
 
             <div class="carousel-track">
-              <div class="slide active">
-                <img src="/images/projects/project1/1.webp" />
+              <% project.images.forEach( (img,index)=>{ %>
+
+              <div class="slide <%= index===0 ? 'active' : '' %>">
+                <img src="<%= img.src %>" alt="<%= img.caption %>" />
+
+                <%
+
+if(img.caption){
+
+%>
+
+                <p class="image-caption"><%= img.caption %></p>
+
+                <%
+
+}
+
+%>
               </div>
 
-              <div class="slide">
-                <img src="/images/projects/project1/2.webp" />
-              </div>
+              <%
+
+});
+
+%>
             </div>
 
             <button class="carousel-btn next" onclick="moveSlide(this, 1)">
@@ -341,6 +272,12 @@
             </button>
           </div>
         </div>
+
+        <%
+
+});
+
+%>
       </div>
     </div>
   </div>

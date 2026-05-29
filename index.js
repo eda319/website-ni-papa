@@ -1,6 +1,8 @@
 "use strict";
 
 require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
 const express = require("express");
 const layouts = require("express-ejs-layouts");
 const connectFlash = require("connect-flash");
@@ -41,7 +43,42 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const metadata = JSON.parse(
+    fs.readFileSync("./public/captions.json", "utf8"),
+  );
+
+  const projectsRoot = path.join(__dirname, "public/images/projects");
+
+  const categories = {};
+
+  fs.readdirSync(projectsRoot).forEach((category) => {
+    categories[category] = fs
+      .readdirSync(path.join(projectsRoot, category))
+      .map((projectFolder) => {
+        const projectData = metadata?.[category]?.[projectFolder] || {};
+
+        const imageFiles = fs.readdirSync(
+          path.join(projectsRoot, category, projectFolder),
+        );
+
+        return {
+          name: projectData.title || projectFolder,
+
+          location: projectData.location || "",
+
+          client: projectData.client || "",
+
+          description: projectData.description || "",
+
+          images: imageFiles.map((file) => ({
+            src: `/images/projects/${category}/${projectFolder}/${file}`,
+            caption: projectData.captions?.[file] || "",
+          })),
+        };
+      });
+  });
+
+  res.render("index", { categories });
 });
 
 app.post("/contact", async (req, res) => {

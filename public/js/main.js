@@ -1,59 +1,52 @@
-const hamburger = document.getElementById("hamburger");
-const nav = document.getElementById("nav");
+const hamburger = $("#hamburger");
+const nav = $("#nav");
 
-hamburger.addEventListener("mouseenter", () => {
-  nav.classList.add("active");
+// Hamburger menu
+hamburger.on("mouseenter", function () {
+  nav.addClass("active");
 });
 
-nav.addEventListener("mouseleave", () => {
-  nav.classList.remove("active");
+nav.on("mouseleave", function () {
+  nav.removeClass("active");
 });
 
-const accordionHeaders = document.querySelectorAll(".accordion-header");
-
-accordionHeaders.forEach((header) => {
-  header.addEventListener("click", () => {
-    header.classList.toggle("active");
-
-    const content = header.nextElementSibling;
-
-    content.classList.toggle("show");
-  });
+// Accordion
+$(".accordion-header").on("click", function () {
+  $(this).toggleClass("active");
+  $(this).next().toggleClass("show");
 });
 
+// Copy email
 function copyEmail() {
   navigator.clipboard.writeText("elexcellence@gmail.com");
   alert("Email copied!");
 }
 
+// Carousel slides
 function moveSlide(button, direction) {
-  const carousel = button.closest("[data-carousel]");
-  const slides = carousel.querySelectorAll(".slide");
+  const carousel = $(button).closest("[data-carousel]");
+  const slides = carousel.find(".slide");
 
-  let currentIndex = Array.from(slides).findIndex((s) =>
-    s.classList.contains("active"),
-  );
+  let currentIndex = slides.index(slides.filter(".active"));
 
-  slides[currentIndex].classList.remove("active");
+  slides.eq(currentIndex).removeClass("active");
 
   let nextIndex = currentIndex + direction;
 
   if (nextIndex < 0) nextIndex = slides.length - 1;
   if (nextIndex >= slides.length) nextIndex = 0;
 
-  slides[nextIndex].classList.add("active");
+  slides.eq(nextIndex).addClass("active");
 }
 
+// Project slider
 function moveProject(button, direction) {
-  const slider = button.closest(".project-slider");
+  const slider = $(button).closest(".project-slider");
+  const projects = slider.find(".project-card");
 
-  const projects = slider.querySelectorAll(".project-card");
+  let currentIndex = projects.index(projects.filter(".active"));
 
-  let currentIndex = Array.from(projects).findIndex((project) =>
-    project.classList.contains("active"),
-  );
-
-  projects[currentIndex].classList.remove("active");
+  projects.eq(currentIndex).removeClass("active");
 
   currentIndex += direction;
 
@@ -65,5 +58,5 @@ function moveProject(button, direction) {
     currentIndex = projects.length - 1;
   }
 
-  projects[currentIndex].classList.add("active");
+  projects.eq(currentIndex).addClass("active");
 }
