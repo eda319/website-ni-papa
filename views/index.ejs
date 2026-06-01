@@ -1,3 +1,5 @@
+<!-- ================= HOME ================= -->
+
 <section id="home">
   <div class="hero-container">
     <h1 class="hero-title">Elexcellence</h1>
@@ -11,7 +13,7 @@
       Elexcellence is focused on delivering safe, efficient, and high-quality
       electrical installations and upgrades. We specialize in wiring systems,
       lighting design, and panel improvements built with precision and safety
-      standards in mind.
+      standards.
     </p>
 
     <div class="hero-meta">
@@ -20,143 +22,95 @@
       <p>🔧 Residential • Small Commercial • Repairs</p>
     </div>
 
-    <div class="hero-history">
-      <h3>Our Background</h3>
-      <p>
-        Elexcellence began as a small independent electrical service initiative
-        in 2024, initially handling residential wiring and basic repair work for
-        local homeowners. Through consistent focus on safety, reliability, and
-        practical engineering solutions, it gradually expanded into more
-        structured installation and lighting system projects.
-      </p>
-    </div>
-  </div>
-</section>
+    <!-- SERVICES -->
 
-<section id="about">
-  <div class="section-container">
-    <h1>About Me</h1>
+    <div class="home-subsection">
+      <h2>Services</h2>
 
-    <div class="accordion-item">
-      <h4 class="accordion-header personal-info">Personal Information</h4>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Electrical Installation</h3>
+          <p>Safe wiring solutions for homes and small businesses.</p>
+        </div>
 
-      <div class="accordion-content">
-        <div class="accordion-inner">
-          <p><strong>Name:</strong> Merlito M. Areglo</p>
-          <p><strong>Age:</strong> 57</p>
-          <p><strong>Major:</strong> Electrical Services Contractor</p>
-          <p>
-            An enthusiastic aspiring engineer focused on power systems,
-            automation, and modern web application interfaces.
-          </p>
-          <p><strong>Name:</strong> Merlito M. Areglo</p>
-          <p><strong>Age:</strong> 57</p>
-          <p><strong>Major:</strong> Electrical Services Contractor</p>
-          <p>
-            An enthusiastic aspiring engineer focused on power systems,
-            automation, and modern web application interfaces.
-          </p>
+        <div class="service-card">
+          <h3>Lighting Systems</h3>
+          <p>Indoor and outdoor lighting design and installation.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Repairs & Maintenance</h3>
+          <p>Troubleshooting and reliable electrical fixes.</p>
+        </div>
+
+        <div class="service-card">
+          <h3>Panel Upgrades</h3>
+          <p>Electrical panel improvements and modernization.</p>
         </div>
       </div>
     </div>
 
-    <div class="accordion-item">
-      <h4 class="accordion-header experience">Experience</h4>
+    <!-- WHY US -->
 
-      <div class="accordion-content">
-        <div class="accordion-inner">
-          <p>
-            Over the years, I've developed a unique blend of creative and
-            technical pursuits:
-          </p>
-          <ul>
-            <li>
-              <strong>13 Years of Drumming:</strong> Developed rhythm,
-              precision, coordination, and intense focus through live playing.
-            </li>
-            <li>
-              <strong>Web Development:</strong> Actively learning modern
-              full-stack web architectures, UI systems, and responsive design
-              layouts.
-            </li>
-            <li>
-              <strong>Electrical Projects:</strong> Tinkering with physical
-              circuits, electronics engineering prototypes, and automation
-              concepts.
-            </li>
-            <li>
-              <strong>13 Years of Drumming:</strong> Developed rhythm,
-              precision, coordination, and intense focus through live playing.
-            </li>
-            <li>
-              <strong>Web Development:</strong> Actively learning modern
-              full-stack web architectures, UI systems, and responsive design
-              layouts.
-            </li>
-            <li>
-              <strong>Electrical Projects:</strong> Tinkering with physical
-              circuits, electronics engineering prototypes, and automation
-              concepts.
-            </li>
-            <li>
-              <strong>13 Years of Drumming:</strong> Developed rhythm,
-              precision, coordination, and intense focus through live playing.
-            </li>
-            <li>
-              <strong>Web Development:</strong> Actively learning modern
-              full-stack web architectures, UI systems, and responsive design
-              layouts.
-            </li>
-            <li>
-              <strong>Electrical Projects:</strong> Tinkering with physical
-              circuits, electronics engineering prototypes, and automation
-              concepts.
-            </li>
-            <li>
-              <strong>13 Years of Drumming:</strong> Developed rhythm,
-              precision, coordination, and intense focus through live playing.
-            </li>
-            <li>
-              <strong>Web Development:</strong> Actively learning modern
-              full-stack web architectures, UI systems, and responsive design
-              layouts.
-            </li>
-            <li>
-              <strong>Electrical Projects:</strong> Tinkering with physical
-              circuits, electronics engineering prototypes, and automation
-              concepts.
-            </li>
-          </ul>
+    <div class="home-subsection">
+      <h2>Why Choose Us</h2>
+
+      <div class="trust-grid">
+        <div class="trust-card">
+          <h3>Experience</h3>
+          <p>Hands-on electrical work with real project experience.</p>
+        </div>
+
+        <div class="trust-card">
+          <h3>Reliable Work</h3>
+          <p>Safe, efficient, and long-lasting solutions.</p>
+        </div>
+
+        <div class="trust-card">
+          <h3>Professional Service</h3>
+          <p>Clear communication and quality workmanship.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ================= PROJECTS ================= -->
 
 <section id="projects">
   <div class="section-container projects-container">
     <h1 class="section-title">Projects</h1>
 
-    <!-- CURRENT PROJECTS -->
+    <% ["current","past"].forEach(type=>{ %>
 
     <div class="project-group">
       <div class="group-header">
-        <h2>Current Projects</h2>
+        <h2>
+          <%= type==="current"
+          ? "Current Projects"
+          : "Past Projects" %>
+        </h2>
       </div>
 
       <div class="project-slider">
-        <% categories.current.forEach(project=>{ %>
+        <% categories[type].forEach(project=>{ %>
 
         <div class="project-card">
           <h2 class="project-title"><%= project.name %></h2>
 
           <p class="project-meta">
-            <% if (project.location) { %> 📍 <%= project.location %><br />
+            <% if(project.location){ %> 📍 <%= project.location %>
+
+            <br />
+
             <% } %>
 
-            <% if (project.client) { %>
+            <% if(project.client){ %>
+
             👤 Client:
+
             <%= project.client %>
+
             <% } %>
           </p>
 
@@ -168,31 +122,25 @@
             </button>
 
             <div class="carousel-track">
-              <% project.images.forEach( (img,index)=>{ %>
+              <% project.images.forEach((img,index)=>{ %>
 
-              <div class="slide <%= index===0 ? 'active' : '' %>">
-                <img src="<%= img.src %>" alt="<%= img.caption %>" />
+              <div class="slide <%= index===0 ? 'active':'' %>">
+                <img
+                  src="<%= img.src %>"
+                  alt="<%= img.caption %>"
+                  loading="<%= index===0 ? 'eager':'lazy' %>"
+                  fetchpriority="<%= index===0 ? 'high':'low' %>"
+                  class="project-image"
+                />
 
-                <%
-
-if(img.caption){
-
-%>
+                <% if(img.caption){ %>
 
                 <p class="image-caption"><%= img.caption %></p>
 
-                <%
-
-}
-
-%>
+                <% } %>
               </div>
 
-              <%
-
-});
-
-%>
+              <% }) %>
             </div>
 
             <button class="carousel-btn next" onclick="moveSlide(this, 1)">
@@ -201,134 +149,150 @@ if(img.caption){
           </div>
         </div>
 
-        <%
-
-});
-
-%>
+        <% }) %>
       </div>
     </div>
 
-    <!-- PAST PROJECTS -->
+    <% }) %>
+  </div>
+</section>
 
-    <div class="project-group">
-      <div class="group-header">
-        <h2>Past Projects</h2>
-      </div>
+<!-- ================= ABOUT ================= -->
 
-      <div class="project-slider">
-        <% categories.past.forEach(project=>{ %>
+<section id="about">
+  <div class="section-container">
+    <h1>About</h1>
 
-        <div class="project-card">
-          <h2 class="project-title"><%= project.name %></h2>
+    <p>
+      Elexcellence began as a small independent electrical service initiative in
+      2024, initially handling residential wiring and repair work.
+    </p>
 
-          <p class="project-meta">
-            <% if (project.location) { %> 📍 <%= project.location %><br />
-            <% } %>
+    <!-- EXPERIENCE -->
 
-            <% if (project.client) { %>
-            👤 Client:
-            <%= project.client %>
-            <% } %>
-          </p>
+    <div class="home-subsection">
+      <h2>Experience</h2>
 
-          <p class="project-description"><%= project.description || "" %></p>
+      <p>
+        Hands-on electrical work combined with continuous learning in modern
+        systems.
+      </p>
 
-          <div class="carousel" data-carousel>
-            <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
-              <span class="arrow left"></span>
-            </button>
+      <ul
+        style="
+          text-align: left;
+          max-width: 700px;
+          margin: auto;
+          color: #555;
+          line-height: 1.8;
+        "
+      >
+        <li>Residential wiring and installations</li>
 
-            <div class="carousel-track">
-              <% project.images.forEach( (img,index)=>{ %>
+        <li>Lighting system design and troubleshooting</li>
 
-              <div class="slide <%= index===0 ? 'active' : '' %>">
-                <img src="<%= img.src %>" alt="<%= img.caption %>" />
+        <li>Electrical repairs and maintenance</li>
 
-                <%
+        <li>Field-based project experience</li>
+      </ul>
+    </div>
 
-if(img.caption){
+    <!-- CERTIFICATIONS -->
 
-%>
+    <div class="home-subsection">
+      <h2>Certifications</h2>
 
-                <p class="image-caption"><%= img.caption %></p>
+      <div class="carousel cert-carousel" data-carousel>
+        <button class="carousel-btn prev" onclick="moveSlide(this, -1)">
+          <span class="arrow left"></span>
+        </button>
 
-                <%
+        <div class="carousel-track">
+          <% certifications.forEach((cert,index)=>{ %>
 
-}
-
-%>
-              </div>
-
-              <%
-
-});
-
-%>
-            </div>
-
-            <button class="carousel-btn next" onclick="moveSlide(this, 1)">
-              <span class="arrow right"></span>
-            </button>
+          <div class="slide <%= index===0 ? 'active':'' %>">
+            <img
+              src="<%= cert.src %>"
+              alt="Certification <%= index+1 %>"
+              loading="<%= index===0 ? 'eager':'lazy' %>"
+              class="certificate-image"
+            />
           </div>
+
+          <% }) %>
         </div>
 
-        <%
+        <button class="carousel-btn next" onclick="moveSlide(this, 1)">
+          <span class="arrow right"></span>
+        </button>
+      </div>
+    </div>
 
-});
+    <!-- BUSINESS PERMIT -->
 
-%>
+    <div class="home-subsection">
+      <h2>Business Permit</h2>
+
+      <p>Registered and authorized electrical service provider.</p>
+
+      <div class="permit-container">
+        <img src="/images/permit/permit.webp" alt="Business Permit" />
       </div>
     </div>
   </div>
 </section>
+
+<!-- ================= CONTACT ================= -->
 
 <section id="contact">
   <div class="section-container">
     <h1>Contact Us</h1>
 
     <p class="contact-description">
-      Need electrical services or have questions? Reach out through any of the
-      platforms below.
+      Need electrical services? Reach out below.
     </p>
 
     <div class="contact-methods">
-      <!-- Phone -->
       <a href="tel:+639123456789" class="contact-card">
         <i class="fa-solid fa-phone"></i>
+
         <div>
           <h3>Phone</h3>
+
           <p>+63 912 345 6789</p>
         </div>
       </a>
 
-      <!-- Messenger -->
       <a
         href="https://www.facebook.com/ElexServ"
         target="_blank"
         class="contact-card"
       >
         <i class="fa-brands fa-facebook-messenger"></i>
+
         <div>
           <h3>Messenger</h3>
+
           <p>Message us instantly</p>
         </div>
       </a>
 
-      <!-- Viber -->
       <a href="viber://chat?number=%2B639123456789" class="contact-card">
         <i class="fa-brands fa-viber"></i>
+
         <div>
           <h3>Viber</h3>
+
           <p>Chat with us</p>
         </div>
       </a>
 
-      <!-- Gmail -->
-      <a href="#" class="contact-card" onclick="copyEmail()">
+      <a href="#" onclick="copyEmail()" class="contact-card">
         <i class="fa-solid fa-envelope"></i>
+
         <div>
           <h3>Gmail</h3>
+
           <p>elexcellence@gmail.com</p>
         </div>
       </a>

@@ -1,6 +1,7 @@
 "use strict";
 
 require("dotenv").config();
+
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
@@ -8,6 +9,7 @@ const layouts = require("express-ejs-layouts");
 const connectFlash = require("connect-flash");
 const session = require("express-session");
 const nodemailer = require("nodemailer");
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -17,13 +19,16 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+
   connectionTimeout: 10000,
   greetingTimeout: 10000,
   socketTimeout: 10000,
 });
 
 app.set("view engine", "ejs");
+
 app.use(layouts);
+
 app.use(
   session({
     secret: "your-secret-key",
@@ -31,6 +36,7 @@ app.use(
     saveUninitialized: false,
   }),
 );
+
 app.use(connectFlash());
 
 app.use(express.static("public"));
@@ -43,71 +49,133 @@ app.use((req, res, next) => {
 });
 
 app.get("/", (req, res) => {
-  const metadata = JSON.parse(
-    fs.readFileSync("./public/captions.json", "utf8"),
-  );
+  let metadata = {};
+
+  try {
+    if (fs.existsSync("./public/captions.json")) {
+      const json = JSON.parse(
+        fs.readFileSync("./public/captions.json", "utf8"),
+      );
+
+      metadata = {
+        current: json.current || {},
+        past: json.past || {},
+      };
+    }
+  } catch (err) {
+    console.error("Error reading captions.json:", err);
+  }
+
+  /* PROJECTS */
 
   const projectsRoot = path.join(__dirname, "public/images/projects");
 
-  const categories = {};
+  const categories = {
+    current: [],
+    past: [],
+  };
 
-  fs.readdirSync(projectsRoot).forEach((category) => {
-    categories[category] = fs
-      .readdirSync(path.join(projectsRoot, category))
-      .map((projectFolder) => {
-        const projectData = metadata?.[category]?.[projectFolder] || {};
+  if (fs.existsSync(projectsRoot)) {
+    fs.readdirSync(projectsRoot).forEach((category) => {
+      const categoryPath = path.join(projectsRoot, category);
 
-        const imageFiles = fs.readdirSync(
-          path.join(projectsRoot, category, projectFolder),
-        );
+      if (!fs.statSync(categoryPath).isDirectory()) return;
 
-        return {
-          name: projectData.title || projectFolder,
+      categories[category] = fs
+        .readdirSync(categoryPath)
 
-          location: projectData.location || "",
+        .filter((projectFolder) =>
+          fs.statSync(path.join(categoryPath, projectFolder)).isDirectory(),
+        )
 
-          client: projectData.client || "",
+        .map((projectFolder) => {
+          const projectData = metadata?.[category]?.[projectFolder] || {};
 
-          description: projectData.description || "",
+          const projectFolderPath = path.join(categoryPath, projectFolder);
 
-          images: imageFiles.map((file) => ({
-            src: `/images/projects/${category}/${projectFolder}/${file}`,
-            caption: projectData.captions?.[file] || "",
-          })),
-        };
-      });
+          const images = fs
+            .readdirSync(projectFolderPath)
+
+            .filter((file) => file.endsWith(".webp"))
+
+            .sort((a, b) =>
+              a.localeCompare(b, undefined, {
+                numeric: true,
+              }),
+            )
+
+            .map((file) => ({
+              src: `/images/projects/${category}/${projectFolder}/${file}`,
+
+              caption: path.parse(file).name.replace(/[-_]/g, " "),
+            }));
+
+          return {
+            name: projectData.name || projectFolder,
+
+            location: projectData.location || "",
+
+            client: projectData.client || "",
+
+            description: projectData.description || "",
+
+            images,
+          };
+        });
+    });
+  }
+
+  /* CERTIFICATES */
+
+  const certDir = path.join(__dirname, "public/images/certificates");
+
+  let certifications = [];
+
+  if (fs.existsSync(certDir)) {
+    certifications = fs
+      .readdirSync(certDir)
+
+      .filter((file) => file.endsWith(".webp"))
+
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+
+      .map((file) => ({
+        src: `/images/certificates/${file}`,
+      }));
+  }
+
+  res.render("index", {
+    categories,
+    certifications,
   });
-
-  res.render("index", { categories });
 });
 
 app.post("/contact", async (req, res) => {
-  console.log(req.body);
-
   const { name, email, message } = req.body;
 
   try {
-    console.log("Before sendMail");
-
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
+
       to: process.env.EMAIL_USER,
+
       subject: "New Website Contact Form",
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+
+      text: `Name:${name}\n` + `Email:${email}\n` + `Message:${message}`,
     });
 
-    console.log("Email sent");
-
     req.flash("success", "Message sent successfully!");
+
     return res.redirect("/#contact");
   } catch (error) {
     console.error("EMAIL ERROR:", error);
 
     req.flash("error", "Failed to send message.");
+
     return res.redirect("/#contact");
   }
 });
 
-const server = app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
