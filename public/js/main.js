@@ -7,13 +7,8 @@ $(function () {
     $nav.toggleClass("active");
   });
 
-  $(document).on("click", function (e) {
-    if (
-      !$(e.target).closest("#nav").length &&
-      !$(e.target).closest("#hamburger").length
-    ) {
-      $nav.removeClass("active");
-    }
+  $nav.on("click", "a", function () {
+    $nav.removeClass("active");
   });
 
   /* ================= ACCORDION ================= */
@@ -57,7 +52,7 @@ $(function () {
 
     const getImg = (slide) => {
       const img = $(slide).find("img")[0];
-      return img.currentSrc || img.src;
+      return img.src;
     };
 
     if ("requestIdleCallback" in window) {
@@ -68,42 +63,4 @@ $(function () {
       setTimeout(() => preloadImage(getImg($slides[next])), 200);
     }
   };
-
-  /* ================= CERTIFICATION CAROUSEL ================= */
-
-  window.moveCertSlide = function (btn, direction) {
-    const $carousel = $(btn).closest(".cert-carousel");
-    const $track = $carousel.find(".cert-track");
-    const $images = $track.find("img");
-
-    // current scroll position approximation
-    const scrollAmount = $images.first().outerWidth(true);
-
-    $track.animate(
-      {
-        scrollLeft: $track.scrollLeft() + direction * scrollAmount,
-      },
-      300,
-    );
-  };
-
-  /* ================= CERT ORIENTATION DETECTOR ================= */
-
-  $(".cert-track img").each(function () {
-    const img = this;
-
-    const applyOrientation = () => {
-      if (img.naturalHeight > img.naturalWidth) {
-        $(img).addClass("portrait");
-      } else {
-        $(img).addClass("landscape");
-      }
-    };
-
-    if (img.complete) {
-      applyOrientation();
-    } else {
-      $(img).on("load", applyOrientation);
-    }
-  });
 });
